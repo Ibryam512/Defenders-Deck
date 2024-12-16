@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DefendersDeck.Domain\DefendersDeck.Domain.csproj" />
     <ProjectReference Include="..\DefendersDeck.Models\DefendersDeck.Domain.csproj" />
   </ItemGroup>
 

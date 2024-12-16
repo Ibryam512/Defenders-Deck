@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefendersDeck.API", "Defend
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefendersDeck.App", "DefendersDeck.App\DefendersDeck.App.csproj", "{CFDC8B43-4AEB-4D9D-91B4-8DA909230561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefendersDeck.Domain", "DefendersDeck.Models\DefendersDeck.Domain.csproj", "{89AD1006-EC79-495D-9AD7-04DB2C0FEB0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefendersDeck.Domain", "DefendersDeck.Domain\DefendersDeck.Domain.csproj", "{89AD1006-EC79-495D-9AD7-04DB2C0FEB0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefendersDeck.DataAccess", "DefendersDeck.DataAccess\DefendersDeck.DataAccess.csproj", "{75A3FA4B-993A-4BF7-8F6B-0259FC0153A4}"
 EndProject

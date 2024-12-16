@@ -65,7 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\DefendersDeck.Models\DefendersDeck.Domain.csproj" />
+	  <ProjectReference Include="..\DefendersDeck.Domain\DefendersDeck.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DefendersDeck.Business\DefendersDeck.Business.csproj" />
     <ProjectReference Include="..\DefendersDeck.DataAccess\DefendersDeck.DataAccess.csproj" />
+    <ProjectReference Include="..\DefendersDeck.Domain\DefendersDeck.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
