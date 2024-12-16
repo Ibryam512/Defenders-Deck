@@ -1,0 +1,6 @@
+@DefendersDeck.API_HostAddress = http://localhost:5066
+
+POST {{DefendersDeck.API_HostAddress}}/auth/register
+Accept: application/json
+
+###
