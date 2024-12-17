@@ -1,4 +1,5 @@
-﻿using DefendersDeck.Domain.Entities;
+﻿using DefendersDeck.DataAccess.Seeds;
+using DefendersDeck.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DefendersDeck.DataAccess
@@ -39,6 +40,8 @@ namespace DefendersDeck.DataAccess
                 .WithOne(t => t.Difficulty)
                 .HasForeignKey<TowerLevel>(t => t.DifficultyId);
             });
+
+            CardsSeed.SeedCards(modelBuilder);
         }
     }
 }

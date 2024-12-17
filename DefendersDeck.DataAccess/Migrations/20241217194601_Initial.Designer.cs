@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DefendersDeck.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241215101044_Initial")]
+    [Migration("20241217194601_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -55,7 +55,7 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.ToTable("CardUser");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.Card", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.Card", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,9 +93,119 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amount = 25,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, a one-time attack is activated, dealing 25 damage.",
+                            ImageUrl = "",
+                            Name = "Fire Arrows",
+                            Price = 50,
+                            Turns = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amount = 25,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, for the next three turns, an earthquake occurs, dealing 25 damage.",
+                            ImageUrl = "",
+                            Name = "Earthquake",
+                            Price = 70,
+                            Turns = 3,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amount = 30,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, a one-time sound wave appears, dealing 30 damage.",
+                            ImageUrl = "",
+                            Name = "Sound Wave",
+                            Price = 60,
+                            Turns = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amount = 20,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, a metal wall is generated, protecting against 20 damage",
+                            ImageUrl = "",
+                            Name = "Fullmetal Alchemy",
+                            Price = 80,
+                            Turns = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amount = 50,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, a water shield appears for one turn, absorbing up to 50 attack damage.",
+                            ImageUrl = "",
+                            Name = "Water Shield",
+                            Price = 100,
+                            Turns = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Amount = 30,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, the tower restores 30 health as a one-time effect.",
+                            ImageUrl = "",
+                            Name = "First Aid",
+                            Price = 40,
+                            Turns = 1,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Amount = 20,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, it restores 20 health per turn for three turns.",
+                            ImageUrl = "",
+                            Name = "Special Help",
+                            Price = 70,
+                            Turns = 3,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Amount = 100,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, the tower's entire health is restored as a one-time effect.",
+                            ImageUrl = "",
+                            Name = "Health Potion",
+                            Price = 120,
+                            Turns = 1,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Amount = 0,
+                            CreationDate = new DateTime(2024, 12, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            Description = "When this card is placed, all dead enemies reappear as shadows and attack the living enemies. Shadows disappear when they kill an enemy.",
+                            ImageUrl = "",
+                            Name = "Shadow Army",
+                            Price = 150,
+                            Turns = 1,
+                            Type = 3
+                        });
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.Difficulty", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.Difficulty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,7 +238,7 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.ToTable("Difficulties");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.EnemyLevel", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.EnemyLevel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,7 +270,7 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.ToTable("EnemyLevels");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.Game", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.Game", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -192,7 +302,7 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.TowerLevel", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.TowerLevel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,7 +331,7 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.ToTable("TowerLevels");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.User", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -254,13 +364,13 @@ namespace DefendersDeck.DataAccess.Migrations
 
             modelBuilder.Entity("CardGame", b =>
                 {
-                    b.HasOne("DefendersDeck.Models.Card", null)
+                    b.HasOne("DefendersDeck.Domain.Entities.Card", null)
                         .WithMany()
                         .HasForeignKey("CardsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DefendersDeck.Models.Game", null)
+                    b.HasOne("DefendersDeck.Domain.Entities.Game", null)
                         .WithMany()
                         .HasForeignKey("GamesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,39 +379,39 @@ namespace DefendersDeck.DataAccess.Migrations
 
             modelBuilder.Entity("CardUser", b =>
                 {
-                    b.HasOne("DefendersDeck.Models.Card", null)
+                    b.HasOne("DefendersDeck.Domain.Entities.Card", null)
                         .WithMany()
                         .HasForeignKey("CardsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DefendersDeck.Models.User", null)
+                    b.HasOne("DefendersDeck.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.EnemyLevel", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.EnemyLevel", b =>
                 {
-                    b.HasOne("DefendersDeck.Models.Difficulty", "Difficulty")
+                    b.HasOne("DefendersDeck.Domain.Entities.Difficulty", "Difficulty")
                         .WithOne("EnemyLevel")
-                        .HasForeignKey("DefendersDeck.Models.EnemyLevel", "DifficultyId")
+                        .HasForeignKey("DefendersDeck.Domain.Entities.EnemyLevel", "DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Difficulty");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.Game", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.Game", b =>
                 {
-                    b.HasOne("DefendersDeck.Models.Difficulty", "Difficulty")
+                    b.HasOne("DefendersDeck.Domain.Entities.Difficulty", "Difficulty")
                         .WithMany()
                         .HasForeignKey("DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DefendersDeck.Models.User", "User")
+                    b.HasOne("DefendersDeck.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -312,18 +422,18 @@ namespace DefendersDeck.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.TowerLevel", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.TowerLevel", b =>
                 {
-                    b.HasOne("DefendersDeck.Models.Difficulty", "Difficulty")
+                    b.HasOne("DefendersDeck.Domain.Entities.Difficulty", "Difficulty")
                         .WithOne("TowerLevel")
-                        .HasForeignKey("DefendersDeck.Models.TowerLevel", "DifficultyId")
+                        .HasForeignKey("DefendersDeck.Domain.Entities.TowerLevel", "DifficultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Difficulty");
                 });
 
-            modelBuilder.Entity("DefendersDeck.Models.Difficulty", b =>
+            modelBuilder.Entity("DefendersDeck.Domain.Entities.Difficulty", b =>
                 {
                     b.Navigation("EnemyLevel")
                         .IsRequired();

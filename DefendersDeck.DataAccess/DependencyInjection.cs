@@ -1,5 +1,6 @@
 ﻿using DefendersDeck.DataAccess.Contracts;
 using DefendersDeck.DataAccess.Repositories;
+using DefendersDeck.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace DefendersDeck.DataAccess
                 options.UseSqlServer(connectionString));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IRepository<User>, UserRepository>();
 
             return services;
         }

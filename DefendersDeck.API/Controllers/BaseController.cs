@@ -1,6 +1,7 @@
 ﻿using DefendersDeck.Domain.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Security.Claims;
 
 namespace DefendersDeck.API.Controllers
 {
@@ -16,6 +17,18 @@ namespace DefendersDeck.API.Controllers
                 HttpStatusCode.NotFound => NotFound(response),
                 _ => StatusCode((int)response.StatusCode, response),
             };
+        }
+
+        protected int RetrieveUserId()
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId is null)
+            {
+                return 0;
+            }
+
+            return int.Parse(userId);
         }
     }
 }

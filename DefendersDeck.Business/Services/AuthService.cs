@@ -1,12 +1,12 @@
 ﻿using DefendersDeck.Business.Contracts;
+using DefendersDeck.Business.Mappers;
 using DefendersDeck.DataAccess.Contracts;
-using DefendersDeck.Domain.Contracts;
 using DefendersDeck.Domain.Entities;
 using DefendersDeck.Domain.Responses;
 
 namespace DefendersDeck.Business.Services
 {
-    public class AuthService(IRepository<User> userRepository, IPasswordHasher passwordHasher, ITokenProvider tokenProvider) : IAuthService
+    public class AuthService(IRepository<User> userRepository, ICardService cardService, IPasswordHasher passwordHasher, ITokenProvider tokenProvider) : IAuthService
     {
         public async Task<BaseResponse<string>> Login(Domain.Requests.LoginRequest request)
         {
@@ -44,12 +44,14 @@ namespace DefendersDeck.Business.Services
             }
 
             string passwordHash = passwordHasher.Hash(request.Password);
+            var deck = await cardService.GenerateDeck();
 
-            var newUser = new User 
-            { 
+            var newUser = new User
+            {
                 Username = request.Username,
                 PasswordHash = passwordHash,
-                ProfileImageUrl = ""
+                ProfileImageUrl = "",
+                Cards = deck.ToList()
             };
 
             await userRepository.AddAsync(newUser);

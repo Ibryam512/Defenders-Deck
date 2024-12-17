@@ -1,5 +1,4 @@
 ﻿using DefendersDeck.Business.Contracts;
-using DefendersDeck.Domain.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DefendersDeck.API.Controllers

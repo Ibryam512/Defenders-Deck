@@ -1,6 +1,6 @@
 ﻿using DefendersDeck.Domain.Responses;
 
-namespace DefendersDeck.Domain.Contracts
+namespace DefendersDeck.Business.Contracts
 {
     public interface IAuthService
     {
