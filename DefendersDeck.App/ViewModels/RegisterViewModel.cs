@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace DefendersDeck.App.ViewModels
 {
-    public partial class LoginViewModel : INotifyPropertyChanged
+    public partial class RegisterViewModel : INotifyPropertyChanged
     {
         private readonly AuthService _authService;
 
@@ -30,32 +30,32 @@ namespace DefendersDeck.App.ViewModels
             }
         }
 
-        public ICommand LoginCommand { get; private set; }
+        public ICommand RegisterCommand { get; private set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public LoginViewModel(AuthService authService)
+        public RegisterViewModel(AuthService authService)
         {
             _authService = authService;
 
-            LoginCommand = new Command(async () => await Login());
+            RegisterCommand = new Command(async () => await Register());
         }
 
-        private async Task Login()
+        private async Task Register()
         {
-            var request = new LoginRequest(Username, Password);
-            var result = await _authService.LoginAsync(request);
+            var request = new RegisterRequest(Username, Password);
+            var result = await _authService.RegisterAsync(request);
 
             if (result)
             {
-                await Shell.Current.DisplayAlert("Success", "Login Successful!", "OK");
+                await Shell.Current.DisplayAlert("Success", "Registration Successful!", "OK");
 
                 // Navigate to another page (e.g., HomePage)
-                await Shell.Current.GoToAsync("//HomePage");
+                // await Shell.Current.GoToAsync("//HomePage");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Login failed. Please try again.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Registration failed. Please try again.", "OK");
             }
         }
 

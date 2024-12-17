@@ -1,5 +1,6 @@
 ﻿using DefendersDeck.App.Services;
 using DefendersDeck.App.ViewModels;
+using DefendersDeck.App.Views;
 using Microsoft.Extensions.Logging;
 
 namespace DefendersDeck.App
@@ -20,6 +21,10 @@ namespace DefendersDeck.App
             builder.Services.AddSingleton<AuthService>();
 
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+
+            builder.Services.AddTransient<LoginPage>(); 
+            builder.Services.AddTransient<RegisterPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
