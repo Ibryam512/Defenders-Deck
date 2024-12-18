@@ -21,11 +21,6 @@ namespace DefendersDeck.API.Controllers
         public async Task<IActionResult> GetCardsForMarket()
         {
             int userId = RetrieveUserId();
-            
-            if (userId == 0)
-            {
-                return NotFound();
-            }
 
             var response = await cardService.GetCardsForMarketAsync(userId);
 
@@ -39,12 +34,19 @@ namespace DefendersDeck.API.Controllers
         {
             int userId = RetrieveUserId();
 
-            if (userId == 0)
-            {
-                return NotFound();
-            }
-
             var response = await cardService.GetDeckAsync(userId);
+
+            return response.Success
+                    ? Ok(response)
+                    : HandleFailure(response);
+        }
+
+        [HttpPost("deck/{cardId}")]
+        public async Task<IActionResult> AddCardToDeck([FromRoute] int cardId)
+        {
+            int userId = RetrieveUserId();
+
+            var response = await cardService.AddCardToDeck(cardId, userId);
 
             return response.Success
                     ? Ok(response)

@@ -12,7 +12,6 @@ namespace DefendersDeck.Business.Services
         public async Task<BaseResponse<IEnumerable<CardDto>>> GetCardsAsync()
         {
             var cards = await cardRepository.GetAllAsync();
-
             var cardsResponse = cards.Select(card => card.ToCardDto());
 
             return BaseResponse<IEnumerable<CardDto>>.Successful(cardsResponse);
@@ -24,8 +23,6 @@ namespace DefendersDeck.Business.Services
             var deck = await GetDeck(id);
 
             var cardsForMarket = cards
-                                    .Concat(deck)
-                                    .DistinctBy(card => card.Id)
                                     .Select(card => card.ToCardForMarketDto(inDeck: deck.Any(c => c.Id == card.Id)))
                                     .OrderBy(card => card.InDeck);
 
@@ -35,10 +32,27 @@ namespace DefendersDeck.Business.Services
         public async Task<BaseResponse<IEnumerable<CardDto>>> GetDeckAsync(int id)
         {
             var deck = await GetDeck(id);
-
             var deckResponse = deck.Select(card => card.ToCardDto());
 
             return BaseResponse<IEnumerable<CardDto>>.Successful(deckResponse);
+        }
+
+        public async Task<BaseResponse<bool>> AddCardToDeck(int cardId, int userId)
+        {
+            var user = await userRepository.GetByIdAsync(userId);
+            var card = await cardRepository.GetByIdAsync(cardId);
+
+            if (user.CurrencyAmount < card.Price)
+            {
+                // We return successful even though the card cannot be bought because this is not http/server/validation issue
+                return BaseResponse<bool>.Successful(false, message: "Amount not enough.");
+            }
+
+            user.CurrencyAmount -= card.Price;
+            user.Cards.Add(card);
+            await userRepository.UpdateAsync(user);
+
+            return BaseResponse<bool>.Successful(true);
         }
 
         private async Task<IEnumerable<Card>> GetDeck(int id)
