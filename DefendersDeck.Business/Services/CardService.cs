@@ -24,7 +24,7 @@ namespace DefendersDeck.Business.Services
 
             var cardsForMarket = cards
                                     .Select(card => card.ToCardForMarketDto(inDeck: deck.Any(c => c.Id == card.Id)))
-                                    .OrderBy(card => card.InDeck);
+                                    .OrderByDescending(card => card.InDeck);
 
             return BaseResponse<IEnumerable<CardForMarketDto>>.Successful(cardsForMarket);
         }

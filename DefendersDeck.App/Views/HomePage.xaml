@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DefendersDeck.App.Views.HomePage"
+             Title="HomePage">
+    <VerticalStackLayout Spacing="20" Padding="30" HorizontalOptions="Center" VerticalOptions="Center">
+        <!-- Game Title -->
+        <Label Text="Defenders Deck"
+               FontSize="32"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center" />
+
+        <!-- Play Button -->
+        <Button Text="Play"
+                FontSize="20"
+                TextColor="White"
+                BackgroundColor="#4CAF50"
+                CornerRadius="15"
+                WidthRequest="200"
+                HeightRequest="50"
+                HorizontalOptions="Center" />
+
+        <!-- Market Button -->
+        <Button Text="Market"
+                FontSize="20"
+                TextColor="White"
+                BackgroundColor="#2196F3"
+                CornerRadius="15"
+                WidthRequest="200"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Clicked="OnMarketButtonClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

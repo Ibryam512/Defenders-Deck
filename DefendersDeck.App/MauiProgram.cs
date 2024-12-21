@@ -19,12 +19,16 @@ namespace DefendersDeck.App
                 });
 
             builder.Services.AddSingleton<AuthService>();
+            builder.Services.AddSingleton<CardService>();
 
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<MarketViewModel>();
 
             builder.Services.AddTransient<LoginPage>(); 
             builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<MarketPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();

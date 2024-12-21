@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DefendersDeck.App.Views.MarketPage"
+             Title="MarketPage"
+             xmlns:vm="clr-namespace:DefendersDeck.App.ViewModels"
+             xmlns:dtos="clr-namespace:DefendersDeck.Domain.DTOs;assembly=DefendersDeck.Domain"
+             x:DataType="vm:MarketViewModel">
+
+    <ContentPage.Content>
+        <Grid>
+            <HorizontalStackLayout Padding="10" VerticalOptions="Start">
+                <Button 
+                    Text="&#x2190;" 
+                    FontSize="24" 
+                    BackgroundColor="Transparent" 
+                    TextColor="White" 
+                    Command="{Binding NavigateHomeCommand}" />
+                <Label 
+                    Text="Market"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand" 
+                />
+            </HorizontalStackLayout>
+            <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBooleanConverter}}">
+                <VerticalStackLayout 
+                    Spacing="10" 
+                    Padding="50" 
+                >
+                    <CollectionView 
+                        ItemsSource="{Binding Cards}"
+                        VerticalOptions="FillAndExpand"
+                    >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="dtos:CardForMarketDto">
+                                <Border
+                                    Padding="10"
+                                    Margin="5"
+                                >
+                                    <StackLayout>
+                                        <Label
+                                            Text="{Binding Card.Name}"
+                                            FontSize="20"
+                                            FontAttributes="Bold"
+                                            TextColor="White" 
+                                        />
+                                        <Label
+                                            Text="{Binding Card.Description}"
+                                            FontSize="16"
+                                            TextColor="Gray" 
+                                        />
+                                        <Label 
+                                            Text="{Binding Card.Price, StringFormat='Price: {0}'}"
+                                            FontSize="16"
+                                            TextColor="White" 
+                                        />
+                                        <Button 
+                                            Text="Buy"
+                                            IsVisible="{Binding InDeck, Converter={StaticResource InvertedBooleanConverter}}"
+                                            BackgroundColor="#FF5722"
+                                            TextColor="White"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MarketViewModel}}, Path=BuyCommand}"
+                                            CommandParameter="{Binding .}" 
+                                        />
+                                    </StackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+            <ActivityIndicator 
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" 
+            />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

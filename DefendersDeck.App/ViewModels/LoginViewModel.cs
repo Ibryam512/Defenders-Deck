@@ -1,12 +1,10 @@
 ﻿using DefendersDeck.App.Services;
 using DefendersDeck.Domain.Requests;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace DefendersDeck.App.ViewModels
 {
-    public partial class LoginViewModel : INotifyPropertyChanged
+    public partial class LoginViewModel : BaseViewModel
     {
         private readonly AuthService _authService;
 
@@ -16,8 +14,11 @@ namespace DefendersDeck.App.ViewModels
             get => username;
             set
             {
-                username = value;
-                OnPropertyChanged();
+                if (username != value)
+                {
+                    username = value;
+                    OnPropertyChanged(nameof(Username));
+                }
             }
         }
         public string Password
@@ -25,14 +26,15 @@ namespace DefendersDeck.App.ViewModels
             get => password;
             set
             {
-                password = value;
-                OnPropertyChanged();
+                if (password != value)
+                {
+                    password = value;
+                    OnPropertyChanged(nameof(Password));
+                }
             }
         }
 
         public ICommand LoginCommand { get; private set; }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public LoginViewModel(AuthService authService)
         {
@@ -58,8 +60,5 @@ namespace DefendersDeck.App.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Login failed. Please try again.", "OK");
             }
         }
-
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
